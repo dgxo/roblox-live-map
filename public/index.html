@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Roblox Map</title>
+   <link rel="stylesheet" href="/css/main.css">
+</head>
+
+<body>
+   <div id="map">
+      <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+         <defs>
+            <pattern id="smallGrid" width="10" height="10" patternUnits="userSpaceOnUse">
+               <path d="M 10 0 L 0 0 0 10" fill="none" stroke="gray" stroke-width="0.5" />
+            </pattern>
+            <pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse">
+               <rect width="100" height="100" fill="url(#smallGrid)" />
+               <path d="M 100 0 L 0 0 0 100" fill="none" stroke="gray" stroke-width="1" />
+            </pattern>
+         </defs>
+
+         <rect width="100%" height="100%" rx="12" fill="url(#smallGrid)" />
+      </svg>
+      <!-- <div id="spawn" style="translate: 0px 0px;"></div> -->
+   </div>
+   <aside>
+      <section class="status">
+         <h2>Status</h2>
+
+         <div id="status-indicator" class="status-indicator connecting">
+            <svg height="16" width="16" xmlns="http://www.w3.org/2000/svg">
+               <circle r="8" cx="8" cy="8" fill="currentColor" />
+            </svg>
+            <span id="status">Connecting...</span>
+         </div>
+
+         <table id="stats-table">
+            <tr>
+               <td>Players</td>
+               <td id="players">...</td>
+            </tr>
+            <tr>
+               <td>Viewers</td>
+               <td id="viewers">...</td>
+            </tr>
+            <tr>
+               <td>Average Ping</td>
+               <td id="average-ping">...</td>
+            </tr>
+            <tr>
+               <td>Server FPS</td>
+               <td id="server-fps">...</td>
+            </tr>
+            <tr>
+               <td>Server Location</td>
+               <td id="server-location">...</td>
+            </tr>
+         </table>
+      </section>
+
+      <section class="players">
+         <h2>Players</h2>
+
+         <ul id="player-list">
+            <li class="player" id="player-template" hidden>
+               <img src="/placeholder.png" alt="Player headshot" class="avatar">
+               <span id="player-display-name"></span> <span id="player-username"></span>
+            </li>
+         </ul>
+      </section>
+      <div id="debug"></div>
+   </aside>
+
+   <script src="reconnecting-websocket.min.js"></script>
+   <script src="index.js" async defer></script>
+</body>
+
+</html>
