@@ -397,8 +397,7 @@ function broadcast(data: WebhookEvent) {
 	});
 }
 
-app.listen(process.env.PORT);
-console.log(`Listening on ${process.env.PORT}`);
+app.listen(process.env.PORT, () => console.log(`Server ready on port ${process.env.PORT}.`));
 
 interface Server {
 	jobId: String;

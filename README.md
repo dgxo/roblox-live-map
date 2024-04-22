@@ -12,7 +12,7 @@ bun install
 
 Copy `.env.example` into `.env` and optionally change the port.
 
-Lua code is currently not open source, once I complete it and clean it up, it will be released.
+The Lua code is currently not open source, but once I complete and clean it up, it will be released.
 
 ### Development
 
