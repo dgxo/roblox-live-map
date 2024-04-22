@@ -26,7 +26,7 @@ app.use(function (req: any, res: any, next: any) {
 	// if (req.headers.referrer.includes('https://roblox-live.dgox.uk/') || req.headers.referrer.includes('localhost')) {
 	// 	return res.status(403).json({ error: 'Invalid Referrer' });
 	// }
-	console.log(`${req.method} request to ${req.url} with user agent ${req.headers['user-agent']}`);
+	// console.log(`${req.method} request to ${req.url} with user agent ${req.headers['user-agent']}`);
 
 	next();
 });
@@ -96,7 +96,7 @@ function updateServer(req: any, res: any) {
 		type: 'statsUpdated',
 		data: {
 			stats: {
-				viewers: server.stats.viewers,
+				viewers: connections.length,
 				averagePing: body.stats.averagePing,
 				serverFps: body.stats.serverFps,
 				location: server.stats.location,
@@ -163,7 +163,7 @@ app.get('/api/servers/:jobId/delete', deleteServer);
 
 // create player
 // req body: {username, displayName, rank?, data: {position: {x, y, z}}}
-app.post('/api/servers/:jobId/players/:userId', function (req: any, res: any) {
+function createPlayer(req: any, res: any) {
 	const body = req.body;
 	const jobId = req.params.jobId;
 	const userId = req.params.userId;
@@ -187,9 +187,12 @@ app.post('/api/servers/:jobId/players/:userId', function (req: any, res: any) {
 		rank: body.rank ?? 'Player',
 		data: {
 			position: {
-				x: 0,
-				y: 0,
-				z: 0,
+				x: body.data.position.x,
+				y: body.data.position.y,
+				z: body.data.position.z,
+			},
+			rotation: {
+				y: body.data.rotation.y,
 			},
 		},
 	});
@@ -208,10 +211,14 @@ app.post('/api/servers/:jobId/players/:userId', function (req: any, res: any) {
 					y: body.data.position.y,
 					z: body.data.position.z,
 				},
+				rotation: {
+					y: body.data.rotation.y,
+				},
 			},
 		},
 	});
-});
+}
+app.post('/api/servers/:jobId/players/:userId', createPlayer);
 
 // get player
 app.get('/api/servers/:jobId/players/:userId', function (req: any, res: any) {
@@ -264,7 +271,8 @@ function updatePlayer(req: any, res: any) {
 	const player = server.players?.[playerIndex];
 
 	if (!player) {
-		res.status(404).send('Player not found');
+		res.send('Player not found, creating');
+		createPlayer(req, res);
 		return;
 	}
 
@@ -280,6 +288,9 @@ function updatePlayer(req: any, res: any) {
 				y: body.data.position.y,
 				z: body.data.position.z,
 			},
+			rotation: {
+				y: body.data.rotation.y,
+			},
 		},
 	};
 	res.send('200 Ok');
@@ -293,6 +304,9 @@ function updatePlayer(req: any, res: any) {
 					x: body.data.position.x,
 					y: body.data.position.y,
 					z: body.data.position.z,
+				},
+				rotation: {
+					y: body.data.rotation.y,
 				},
 			},
 		},
@@ -408,6 +422,9 @@ interface Player {
 			x: Number;
 			y: Number;
 			z: Number;
+		};
+		rotation: {
+			y: Number;
 		};
 	};
 }

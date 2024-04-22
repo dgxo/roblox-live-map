@@ -1,9 +1,11 @@
 const map = document.querySelector('#map');
+const canvas = document.querySelector('canvas');
 const playerList = document.querySelector('#player-list');
 const statusIndicator = document.querySelector('#status-indicator');
 const statusText = statusIndicator.querySelector('#status');
 const debugText = document.querySelector('#debug');
 const statsTable = document.querySelector('#stats-table');
+const clearButton = document.querySelector('#clear-cache');
 
 const socket = new ReconnectingWebSocket(`wss://${location.host}/ws`);
 
@@ -13,10 +15,8 @@ fetch('/api/servers/')
 		players.clear();
 		data.forEach((server) => {
 			server.players.forEach((player) => {
-				console.log(player);
 				if (document.querySelector(`#player-pin-${player.userId}`)) {
 					players.update(player);
-					console.log('updating');
 				} else {
 					players.add(player);
 				}
@@ -37,7 +37,7 @@ socket.addEventListener('error', (event) => {
 socket.addEventListener('message', (event) => {
 	const data = JSON.parse(event.data);
 	// debugText.textContent = JSON.stringify(data, null, 3);
-	console.log('Event', data);
+	console.log('Message', data);
 
 	switch (data.type) {
 		case 'playerAdded':
@@ -58,13 +58,6 @@ socket.addEventListener('message', (event) => {
 	}
 });
 
-/* <template id="player-template">
-               <li class="player">
-                  <img src="/placeholder.png" alt="Player headshot" class="avatar">
-                  <span id="player-display-name">Dog</span> <span id="player-username">MrTortoise_guy</span>
-               </li>
-            </template> */
-
 let playerCount = 0;
 const players = {
 	add: async (data) => {
@@ -75,16 +68,17 @@ const players = {
 		playerItem.querySelector('#player-display-name').textContent = data.displayName;
 		playerItem.querySelector('#player-username').textContent = data.username;
 		playerItem.hidden = null;
-		playerItem.querySelector('img').src = `/api/headshot/${data.userId}`;
+		playerItem.querySelector('img').src = `/api/headshot/${data.userId}?size=100`;
 		playerList.appendChild(playerItem);
 
 		// add to map
-		const playerPin = document.createElement('div');
+		const playerPin = document.createElement('img');
+		playerPin.src = `/api/headshot/${data.userId}?size=100`;
 		playerPin.className = 'player-pin';
 		playerPin.id = `player-pin-${data.userId}`;
 		playerPin.style.backgroundColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
-		playerPin.style.translate = `${(data.data.position.x + 15) * 4}px ${(data.data.position.y + 15) * 4}px`;
-		playerPin.style.scale = data.data.position.z / 2;
+		playerPin.style.translate = `${data.data.position.x + 15}px ${data.data.position.y + 15}px`;
+		playerPin.style.rotate = `${data.data.rotation.y}deg`;
 		map.appendChild(playerPin);
 
 		// update stats
@@ -98,8 +92,8 @@ const players = {
 			console.error('Player pin not found');
 			return;
 		}
-		playerPin.style.translate = `${(data.data.position.x + 15) * 4}px ${(data.data.position.y + 15) * 4}px`;
-		playerPin.style.scale = data.data.position.z / 2;
+		playerPin.style.translate = `${data.data.position.x + 15}px ${data.data.position.y + 15}px`;
+		playerPin.style.rotate = `${data.data.rotation.y}deg`;
 	},
 	delete: (data) => {
 		// delete player item
@@ -129,3 +123,5 @@ const players = {
 		statsTable.querySelector('#players').textContent = playerCount;
 	},
 };
+
+clearButton.addEventListener('click', players.clear);
