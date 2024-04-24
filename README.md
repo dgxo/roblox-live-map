@@ -1,75 +1,29 @@
-# Nuxt 3 Minimal Starter
+# Roblox Live v2
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+A live player map for [Roblox](https://roblox.com/) experiences, rebuilt in Nuxt and Tailwind.
 
-## Setup
-
-Make sure to install the dependencies:
+## Installation
 
 ```bash
-# npm
-npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
 bun install
 ```
 
-## Development Server
+## Usage
 
-Start the development server on `http://localhost:3000`:
+Copy `.env.example` into `.env` and optionally change the port.
 
-```bash
-# npm
-npm run dev
+The Lua code is currently not open source, but once I complete and clean it up, it will be released.
 
-# pnpm
-pnpm run dev
+### Development
 
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-## Production
-
-Build the application for production:
+Watches for file changes and restarts the server.
 
 ```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
+bun dev
 ```
 
-Locally preview production build:
-
+### Production:
+Build for a production environment.
 ```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
+bun build
 ```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
