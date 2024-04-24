@@ -6,6 +6,10 @@ const players = ref([
 		username: 'MrTortoise_guy',
 	},
 ]);
+
+useHead({
+	title: `${players.value.length} Player Server | Roblox Live`,
+});
 </script>
 
 <template>
