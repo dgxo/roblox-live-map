@@ -5,6 +5,7 @@ export default defineNuxtConfig({
 		head: {
 			title: 'Roblox Live',
 		},
+		pageTransition: { name: 'page', mode: 'out-in' },
 	},
 	modules: [
 		'@nuxt/ui',

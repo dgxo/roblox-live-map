@@ -70,6 +70,9 @@ const players = ref([
 					</li>
 				</ul>
 			</section>
+			<div class="flex">
+				<UButton to="/">Back to Servers</UButton>
+			</div>
 		</aside>
 	</div>
 </template>

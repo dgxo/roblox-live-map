@@ -1,5 +1,17 @@
 <template>
-	<div class="font-['DM Sans']">
+	<div class="font-['DM Sans'] bg-gray-950">
 		<NuxtPage />
 	</div>
 </template>
+
+<style>
+.page-enter-active,
+.page-leave-active {
+	transition: all 0.2s;
+}
+.page-enter-from,
+.page-leave-to {
+	opacity: 0;
+	filter: blur(4px);
+}
+</style>

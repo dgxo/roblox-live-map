@@ -519,7 +519,7 @@ servers.value[0].players.push(...servers.value[0].players, ...servers.value[0].p
 </script>
 
 <template>
-	<div class="flex p-8 gap-4 flex-col bg-gray-950 h-screen w-full text-white">
+	<div class="flex p-8 gap-4 flex-col h-screen w-full text-white">
 		<h1 class="text-5xl font-bold">Roblox Live</h1>
 		<p class="text-lg text-gray-400">Select a server</p>
 
