@@ -5,24 +5,7 @@ const players = ref([
 		displayName: 'Dog',
 		username: 'MrTortoise_guy',
 	},
-	{
-		id: 2,
-		displayName: 'MrTortoiseGuy',
-		username: 'MrTortoiseGuy',
-	},
 ]);
-
-onMounted(() => {
-	setInterval(() => {
-		const player = {
-			id: players.value.length + 1,
-			displayName: `player${players.value.length + 1}`,
-			username: `player${players.value.length + 1}`,
-		};
-
-		players.value = [...players.value, player];
-	}, 500);
-});
 </script>
 
 <template>
