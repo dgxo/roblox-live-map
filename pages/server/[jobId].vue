@@ -9,6 +9,7 @@ const players = ref([
 
 useHead({
 	title: `${players.value.length} Player Server | Roblox Live`,
+	meta: [{ name: 'description', content: `Roblox Live Map - ${players.value.length} player server` }],
 });
 </script>
 

@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 useHead({
 	title: 'Servers | Roblox Live',
+	meta: [{ name: 'description', content: `Live Roblox map - see players and trains in real time.` }],
 });
 
 interface Server {
