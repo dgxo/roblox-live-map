@@ -1,0 +1,8 @@
+{
+	"discord.removeDetails": false,
+	"discord.removeLowerDetails": false,
+	"discord.lowerDetailsNoWorkspaceFound": "{empty}",
+	"discord.lowerDetailsEditing": "Workspace: {workspace}",
+	"discord.removeRemoteRepository": true,
+	"discord.enabled": true
+}
