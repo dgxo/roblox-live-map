@@ -13,7 +13,7 @@ useHead({
 </script>
 
 <template>
-	<div class="flex flex-col sm:flex-row p-4 gap-4 bg-gray-950 h-screen w-full">
+	<div class="flex flex-col sm:flex-row p-4 gap-4 bg-gray-950 h-screen w-full text-white">
 		<div id="map" class="flex-grow rounded-xl bg-gray-900 overflow-clip">
 			<svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
 				<defs>
@@ -68,7 +68,7 @@ useHead({
 
 				<ul class="list-none flex flex-col gap-2 overflow-y-auto overflow-x-clip scroll-m-4 max-h-72">
 					<li class="flex items-center gap-2 font-medium" v-bind:id="`player-${player.id}`" v-for="player in players">
-						<img src="/placeholder.png" class="size-8 rounded-full bg-gray-400 object-cover" />
+						<img :src="`/api/headshot/${player.id}`" alt="Player Headshot" class="size-8 rounded-full bg-gray-400 object-cover" />
 						<span id="player-display-name">{{ player.displayName }}</span>
 						<span v-if="player.username !== player.displayName" id="player-username" class="text-gray-500 text-lg">({{ player.username }})</span>
 					</li>
