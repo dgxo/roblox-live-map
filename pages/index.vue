@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import type { Server, Player } from '~/types';
-import { ObjectId } from 'mongoose';
+import { Types } from 'mongoose';
 
 useHead({
 	title: 'Servers | Roblox Live',
@@ -9,13 +9,14 @@ useHead({
 
 let servers: Ref<Server[]> = ref([
 	{
-		_id: '1',
+		_id: 'test',
 		createdAt: 1,
 		jobId: 'test',
 		created: 1,
 		players: [
 			{
-				userId: '361635687',
+				_id: 'test',
+				userId: 361635687,
 				username: 'MrTortoise_guy',
 				rank: 'Owner',
 				displayName: 'Dog',
@@ -31,7 +32,8 @@ let servers: Ref<Server[]> = ref([
 				},
 			},
 			{
-				userId: '361635687',
+				_id: 'test',
+				userId: 361635687,
 				username: 'MrTortoise_guy',
 				rank: 'Owner',
 				displayName: 'Dog',
@@ -47,7 +49,8 @@ let servers: Ref<Server[]> = ref([
 				},
 			},
 			{
-				userId: '361635687',
+				_id: 'test',
+				userId: 361635687,
 				username: 'MrTortoise_guy',
 				rank: 'Owner',
 				displayName: 'Dog',
@@ -72,7 +75,7 @@ let servers: Ref<Server[]> = ref([
 	},
 ]);
 
-servers.value[0].players.push(...servers.value[0].players, ...servers.value[0].players, ...servers.value[0].players, ...servers.value[0].players);
+servers.value[0].players = [...servers.value[0].players, ...servers.value[0].players, ...servers.value[0].players, ...servers.value[0].players];
 </script>
 
 <template>

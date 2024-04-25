@@ -1,10 +1,10 @@
 import type { ObjectId } from 'mongoose';
 
 export interface Server {
-	_id: ObjectId;
+	_id: ObjectId | string;
 	jobId: string;
 	createdAt: number; // epoch seconds
-	players: [Player?];
+	players: Player[] | [];
 	stats: {
 		viewers: number;
 		averagePing: number;
@@ -14,7 +14,7 @@ export interface Server {
 }
 
 export interface Player {
-	_id: ObjectId;
+	_id: ObjectId | string;
 	userId: number;
 	username: string;
 	rank: string;
