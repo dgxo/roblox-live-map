@@ -3,4 +3,7 @@ export default defineAppConfig({
 	theme: {
 		dark: true,
 	},
+	ui: {
+		primary: 'sky',
+	},
 });

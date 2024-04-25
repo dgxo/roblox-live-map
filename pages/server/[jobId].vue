@@ -75,8 +75,8 @@ useHead({
 					</li>
 				</ul>
 			</section>
-			<div class="flex">
-				<UButton to="/">Back to Servers</UButton>
+			<div class="flex gap-2">
+				<UButton icon="i-material-symbols-arrow-back" to="/" size="md" variant="outline" color="white">Back to Servers</UButton>
 			</div>
 		</aside>
 	</div>

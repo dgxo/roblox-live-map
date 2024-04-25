@@ -1,8 +1,8 @@
-// create server with jobId
+// update server with jobId
 export default defineEventHandler(async (event) => {
 	const body = await readBody(event);
 	try {
-		ServerSchema.create(body);
+		return await ServerSchema.findOneAndUpdate({ jobId: event.context.params?.jobId }, body, { new: true });
 	} catch (error) {
 		return error;
 	}
