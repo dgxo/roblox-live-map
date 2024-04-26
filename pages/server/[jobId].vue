@@ -7,6 +7,11 @@ const players = ref([
 	},
 ]);
 
+const route = useRoute();
+const { data: server, pending, error } = await useFetch(() => `/api/servers/${route.params.jobId}/`);
+
+if (!error) onMounted(() => setInterval(refreshNuxtData, 5000));
+
 useHead({
 	title: `${players.value.length} Player Server | Roblox Live`,
 	meta: [{ name: 'description', content: `Roblox Live Map - ${players.value.length} player server` }],
@@ -34,11 +39,26 @@ useHead({
 			<section class="flex p-6 flex-col items-start gap-4 self-stretch rounded-xl bg-gray-900">
 				<h2 class="text-3xl font-bold">Status</h2>
 
-				<div id="status-indicator" class="flex gap-2 font-medium items-center text-orange-400">
+				<div id="status-indicator" v-if="pending" class="flex gap-2 font-medium items-center text-orange-400">
 					<svg height="16" width="16" xmlns="http://www.w3.org/2000/svg">
 						<circle r="8" cx="8" cy="8" fill="currentColor" />
 					</svg>
 					<span id="status">Connecting...</span>
+				</div>
+				<div id="status-indicator" v-else-if="error" class="flex gap-2 font-medium items-center text-red-400">
+					<svg height="16" width="16" xmlns="http://www.w3.org/2000/svg">
+						<circle r="8" cx="8" cy="8" fill="currentColor" />
+					</svg>
+					<span id="status" class="flex flex-col gap-1">
+						An error occurred:
+						<pre class="rounded-md border border-gray-700 bg-gray-800 p-2 max-w-64 text-wrap">{{ error.data.message }}</pre>
+					</span>
+				</div>
+				<div id="status-indicator" v-else class="flex gap-2 font-medium items-center text-green-400">
+					<svg height="16" width="16" xmlns="http://www.w3.org/2000/svg">
+						<circle r="8" cx="8" cy="8" fill="currentColor" />
+					</svg>
+					<span id="status">Connected</span>
 				</div>
 
 				<table id="stats-table">
@@ -68,8 +88,8 @@ useHead({
 				<h2 class="text-3xl font-bold">Status</h2>
 
 				<ul class="list-none flex flex-col gap-2 overflow-y-auto overflow-x-clip scroll-m-4 max-h-72">
-					<li class="flex items-center gap-2 font-medium" v-bind:id="`player-${player.id}`" v-for="player in players">
-						<img :src="`/api/headshot/${player.id}`" alt="Player Headshot" class="size-8 rounded-full bg-gray-400 object-cover" />
+					<li class="flex items-center gap-2 font-medium" v-bind:id="`player-${player.userId}`" v-for="player in server?.players">
+						<img :src="`/api/headshot/${player.userId}`" alt="Player Headshot" class="size-8 rounded-full bg-gray-400 object-cover" />
 						<span id="player-display-name">{{ player.displayName }}</span>
 						<span v-if="player.username !== player.displayName" id="player-username" class="text-gray-500 text-lg">({{ player.username }})</span>
 					</li>
