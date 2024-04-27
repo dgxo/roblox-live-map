@@ -1,6 +1,5 @@
 import { defineMongooseModel } from '#nuxt/mongoose';
 import { Types } from 'mongoose';
-import type { Server } from '~/types';
 
 export const serverSchema = defineMongooseModel({
 	name: 'Server',
