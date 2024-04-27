@@ -1,6 +1,7 @@
 <template>
 	<div class="font-['DM Sans'] bg-gray-950">
 		<NuxtPage />
+		<SpeedInsights />
 	</div>
 </template>
 
