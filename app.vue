@@ -1,3 +1,7 @@
+<script lang="ts" setup>
+import { SpeedInsights } from '@vercel/speed-insights/nuxt';
+</script>
+
 <template>
 	<div class="font-['DM Sans'] bg-gray-950">
 		<NuxtPage />
